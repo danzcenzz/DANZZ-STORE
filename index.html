@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#a8e6df">
+<title>DANZZCENZZ-STORE</title>
+
+<style>
+:root {
+    --telur: #a8e6df;
+    --hitam: #101313;
+    --putih: #ffffff;
+    --kuning: #ffdf45;
+    --hijau: #20c96b;
+    --merah: #ff3434;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: var(--hitam);
+    color: var(--putih);
+    overflow-x: hidden;
+}
+
+button, a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* OPENING */
+
+#opening {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: var(--hitam);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity .6s, visibility .6s;
+}
+
+#opening.hide {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.skip {
+    position: absolute;
+    top: 22px;
+    right: 20px;
+    background: var(--telur);
+    color: var(--hitam);
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.loading-box {
+    width: 85%;
+    max-width: 340px;
+    padding: 35px 20px;
+    background: #191e1e;
+    border: 1px solid var(--telur);
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 0 35px #a8e6df25;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+}
+
+.logo span {
+    color: var(--kuning);
+}
+
+.logo small {
+    display: block;
+    color: var(--telur);
+    font-size: 10px;
+    letter-spacing: 5px;
+    margin-top: 7px;
+}
+
+.loader {
+    width: 47px;
+    height: 47px;
+    border: 5px solid #ffffff20;
+    border-top-color: var(--kuning);
+    border-right-color: var(--telur);
+    border-radius: 50%;
+    margin: 25px auto 18px;
+    animation: putar .8s linear infinite;
+}
+
+@keyframes putar {
+    to { transform: rotate(360deg); }
+}
+
+.loading-text {
+    color: var(--putih);
+    font-size: 13px;
+}
+
+.loading-sub {
+    color: #a8b4b2;
+    font-size: 11px;
+    margin-top: 9px;
+}
+
+/* DASHBOARD */
+
+#app {
+    opacity: 0;
+    transition: opacity .8s;
+    min-height: 100vh;
+}
+
+#app.show {
+    opacity: 1;
+}
+
+header {
+    background: #171c1c;
+    border-bottom: 1px solid #a8e6df35;
+    padding: 18px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.brand {
+    font-weight: 900;
+    font-size: 18px;
+}
+
+.brand span {
+    color: var(--kuning);
+}
+
+.menu-btn {
+    color: var(--hitam);
+    background: var(--telur);
+    padding: 9px 13px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.hero {
+    padding: 55px 6% 45px;
+    background:
+        radial-gradient(ellipse at top right, #a8e6df25, transparent 60%),
+        var(--hitam);
+}
+
+.badge {
+    display: inline-block;
+    border: 1px solid var(--telur);
+    color: var(--telur);
+    padding: 7px 12px;
+    border-radius: 30px;
+    font-size: 11px;
+    letter-spacing: 1px;
+    margin-bottom: 22px;
+}
+
+.hero h1 {
+    font-size: clamp(34px, 8vw, 55px);
+    line-height: 1.1;
+    font-weight: 900;
+    max-width: 600px;
+}
+
+.hero h1 span {
+    color: var(--telur);
+}
+
+.hero p {
+    color: #c0cecb;
+    line-height: 1.8;
+    font-size: 14px;
+    max-width: 500px;
+    margin: 18px 0 25px;
+}
+
+.btn-primary {
+    display: inline-block;
+    background: var(--kuning);
+    color: var(--hitam);
+    padding: 13px 20px;
+    border-radius: 9px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+.section {
+    padding: 30px 5%;
+}
+
+.section-title {
+    font-size: 22px;
+    margin-bottom: 8px;
+}
+
+.section-desc {
+    color: #a9b7b4;
+    font-size: 13px;
+    margin-bottom: 23px;
+    line-height: 1.6;
+}
+
+/* PRODUK */
+
+.products {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.card {
+    background: #191e1e;
+    border: 1px solid #ffffff12;
+    border-radius: 14px;
+    overflow: hidden;
+    transition: transform .25s, border-color .25s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: var(--telur);
+}
+
+.product-image {
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #a8e6df20, #ffffff04);
+    font-size: 42px;
+}
+
+.card-content {
+    padding: 14px;
+}
+
+.card h3 {
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.card p {
+    font-size: 11px;
+    line-height: 1.6;
+    color: #a9b7b4;
+    margin-bottom: 15px;
+}
+
+.card a {
+    display: block;
+    text-align: center;
+    padding: 10px;
+    background: var(--telur);
+    color: var(--hitam);
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 7px;
+}
+
+/* LAYANAN */
+
+.info-box {
+    background: #191e1e;
+    border: 1px solid #a8e6df35;
+    padding: 20px;
+    border-radius: 14px;
+    margin-bottom: 14px;
+}
+
+.info-box h3 {
+    color: var(--telur);
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.info-box p {
+    color: #b9c6c3;
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+footer {
+    border-top: 1px solid #ffffff15;
+    padding: 25px 5%;
+    text-align: center;
+    color: #9aa6a3;
+    font-size: 11px;
+    line-height: 1.8;
+    margin-top: 20px;
+}
+
+footer strong {
+    color: var(--telur);
+}
+
+/* POPUP UNDANGAN */
+
+#inviteOverlay {
+    position: fixed;
+    inset: 0;
+    z-index: 500;
+    background: #000000b8;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+#inviteOverlay.active {
+    display: flex;
+}
+
+.invite-window {
+    position: relative;
+    width: 100%;
+    max-width: 370px;
+    padding: 30px 23px;
+    border-radius: 18px;
+    background: #f8ffff;
+    color: #101313;
+    text-align: center;
+    border: 3px solid var(--telur);
+    box-shadow: 0 20px 80px #0009;
+    animation: mengambang .8s ease-in-out infinite alternate,
+               muncul .45s ease-out;
+}
+
+@keyframes mengambang {
+    from { transform: translateY(-5px); }
+    to { transform: translateY(5px); }
+}
+
+@keyframes muncul {
+    from { opacity: 0; scale: .85; }
+    to { opacity: 1; scale: 1; }
+}
+
+.close-popup {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 31px;
+    height: 31px;
+    border: none;
+    border-radius: 8px;
+    background: var(--merah);
+    color: var(--merah);
+    font-size: 0;
+    cursor: pointer;
+}
+
+.close-popup::after {
+    content: "×";
+    font-size: 25px;
+    color: white;
+    line-height: 1;
+}
+
+.invite-label {
+    display: inline-block;
+    background: #fff1a9;
+    color: #735d00;
+    padding: 7px 12px;
+    border-radius: 30px;
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-bottom: 18px;
+}
+
+.invite-window h2 {
+    font-size: 27px;
+    margin-bottom: 13px;
+}
+
+.active-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: #e1f8e9;
+    color: #168441;
+    border-radius: 30px;
+    padding: 7px 12px;
+    font-size: 10px;
+    font-weight: bold;
+    margin-bottom: 18px;
+}
+
+.green-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #20c96b;
+    box-shadow: 0 0 8px #20c96b;
+}
+
+.invite-window h3 {
+    font-size: 19px;
+    margin-bottom: 12px;
+}
+
+.invite-window p {
+    color: #68716f;
+    font-size: 12px;
+    line-height: 1.8;
+    margin-bottom: 23px;
+}
+
+.whatsapp-btn {
+    display: block;
+    padding: 14px;
+    border-radius: 10px;
+    background: #20c96b;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+    border: 2px solid #101313;
+    transition: .2s;
+}
+
+.whatsapp-btn:hover {
+    background: #16ad59;
+    transform: scale(1.02);
+}
+
+.popup-note {
+    font-size: 10px;
+    color: #8a9693;
+    margin-top: 15px;
+}
+
+/* RESPONSIVE */
+
+@media (min-width: 700px) {
+    .products {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 18px;
+    }
+
+    .product-image {
+        height: 155px;
+    }
+
+    .hero {
+        padding-top: 80px;
+        padding-bottom: 75px;
+    }
+}
+
+@media (max-width: 360px) {
+    .logo {
+        font-size: 21px;
+    }
+
+    .invite-window h2 {
+        font-size: 24px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- OPENING LOADING -->
+<div id="opening">
+    <button class="skip" onclick="finishOpening()">SKIP »</button>
+
+    <div class="loading-box">
+        <div class="logo">
+            DANZZCENZZ<span>-STORE</span>
+            <small>OFFICIAL STORE</small>
+        </div>
+
+        <div class="loader"></div>
+
+        <div class="loading-text">Tunggu sebentar, sedang loading...</div>
+        <div class="loading-sub">Menyiapkan pengalaman terbaik untuk kamu</div>
+    </div>
+</div>
+
+<!-- DASHBOARD UTAMA -->
+<div id="app">
+
+    <header>
+        <div class="brand">DANZZCENZZ<span>-STORE</span></div>
+        <button class="menu-btn"
+                onclick="document.getElementById('produk').scrollIntoView({behavior:'smooth'})">
+            STORE ↓
+        </button>
+    </header>
+
+    <section class="hero">
+        <div class="badge">✦ WELCOME TO OUR STORE</div>
+
+        <h1>Temukan Yang<br>
+        <span>Kamu Butuhkan.</span></h1>
+
+        <p>
+            Selamat datang di DANZZCENZZ-STORE.
+            Temukan berbagai produk dan layanan digital
+            dalam satu tempat dengan pengalaman yang simpel,
+            nyaman, dan modern.
+        </p>
+
+        <a href="#produk" class="btn-primary">JELAJAHI STORE ↗</a>
+    </section>
+
+    <section class="section" id="produk">
+        <h2 class="section-title">✦ Store Kami</h2>
+        <p class="section-desc">
+            Pilih kategori yang ingin kamu kunjungi.
+            Produk dapat disesuaikan dengan kebutuhan store kamu.
+        </p>
+
+        <div class="products">
+
+            <div class="card">
+                <div class="product-image">🌐</div>
+                <div class="card-content">
+                    <h3>Website</h3>
+                    <p>Layanan dan kebutuhan website digital.</p>
+                    <a href="#kontak">Lihat Detail ↗</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="product-image">🎨</div>
+                <div class="card-content">
+                    <h3>Desain Grafis</h3>
+                    <p>Desain kreatif untuk kebutuhan kamu.</p>
+                    <a href="#kontak">Lihat Detail ↗</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="product-image">📱</div>
+                <div class="card-content">
+                    <h3>Layanan Digital</h3>
+                    <p>Berbagai layanan digital sesuai kebutuhan.</p>
+                    <a href="#kontak">Lihat Detail ↗</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="product-image">⚡</div>
+                <div class="card-content">
+                    <h3>Produk Lainnya</h3>
+                    <p>Jelajahi produk lainnya di store kami.</p>
+                    <a href="#kontak">Lihat Detail ↗</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="section" id="kontak">
+        <h2 class="section-title">✦ Informasi Store</h2>
+        <p class="section-desc">
+            Informasi dan bantuan untuk pengunjung store.
+        </p>
+
+        <div class="info-box">
+            <h3>📢 Channel WhatsApp</h3>
+            <p>
+                Gabung channel resmi untuk mendapatkan
+                informasi update dan berita terbaru.
+            </p>
+            <br>
+            <a href="https://whatsapp.com/channel/0029Vb90a8bLY6dGF3QxZR0W"
+               target="_blank"
+               rel="noopener noreferrer"
+               class="btn-primary">GABUNG CHANNEL ↗</a>
+        </div>
+
+        <div class="info-box">
+            <h3>💬 Butuh Bantuan?</h3>
+            <p>
+                Untuk pertanyaan mengenai produk dan layanan,
+                silakan hubungi pengelola DANZZCENZZ-STORE.
+            </p>
+        </div>
+    </section>
+
+    <footer>
+        <strong>DANZZCENZZ-STORE</strong><br>
+        Modern Digital Store · Simple · Creative<br>
+        © <span id="year"></span> DANZZCENZZ-STORE. All rights reserved.
+    </footer>
+
+</div>
+
+<!-- POPUP UNDANGAN WHATSAPP -->
+<div id="inviteOverlay">
+    <div class="invite-window">
+
+        <button class="close-popup"
+                onclick="closeInvite()"
+                aria-label="Tutup undangan">X</button>
+
+        <div class="invite-label">✦ UNDANGAN EKSKLUSIF</div>
+
+        <h2>Undangan Eksklusif</h2>
+
+        <div class="active-label">
+            <span class="green-dot"></span>
+            ACTIVE
+        </div>
+
+        <h3>Gabung Channel WhatsApp</h3>
+
+        <p>
+            Masuk channel untuk informasi update,
+            berita terbaru, pengumuman, dan lainnya.
+            Jangan sampai ketinggalan!
+        </p>
+
+        <a class="whatsapp-btn"
+           href="https://whatsapp.com/channel/0029Vb90a8bLY6dGF3QxZR0W"
+           target="_blank"
+           rel="noopener noreferrer">
+            🟢 MASUK CHANNEL WHATSAPP ↗
+        </a>
+
+        <div class="popup-note">
+            DANZZCENZZ-STORE · INFORMASI RESMI
+        </div>
+
+    </div>
+</div>
+
+<script>
+const opening = document.getElementById("opening");
+const app = document.getElementById("app");
+const inviteOverlay = document.getElementById("inviteOverlay");
+
+let openingFinished = false;
+let inviteTimer;
+
+document.getElementById("year").textContent = new Date().getFullYear();
+
+function finishOpening() {
+    if (openingFinished) return;
+
+    openingFinished = true;
+    opening.classList.add("hide");
+    app.classList.add("show");
+
+    // Setelah opening selesai, tampilkan undangan.
+    inviteTimer = setTimeout(function() {
+        inviteOverlay.classList.add("active");
+    }, 700);
+}
+
+// Opening otomatis selesai setelah 3,5 detik.
+setTimeout(finishOpening, 3500);
+
+function closeInvite() {
+    inviteOverlay.classList.remove("active");
+}
+
+// Klik area gelap di luar jendela untuk menutup popup.
+inviteOverlay.addEventListener("click", function(event) {
+    if (event.target === inviteOverlay) {
+        closeInvite();
+    }
+});
+
+// Tombol Escape juga menutup popup.
+document.addEventListener("keydown", function(event) {
+    if (event.key === "Escape") {
+        closeInvite();
+    }
+});
+</script>
+
+</body>
+</html>
